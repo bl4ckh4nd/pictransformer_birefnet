@@ -2,14 +2,14 @@ import io
 import time
 import logging
 import platform
-from fastapi import FastAPI, File, UploadFile, Request
-from fastapi.responses import StreamingResponse
+from fastapi import FastAPI, File, UploadFile, Request, Query
+from fastapi.responses import StreamingResponse, JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 import torch
 from PIL import Image
-from models.birefnet import BiRefNet
-from image_proc import refine_foreground
-from torchvision import transforms
+from models.registry import registry
+from typing import Optional
 
 # Configure logging
 logging.basicConfig(
@@ -36,7 +36,16 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
 app = FastAPI(title="Background Removal API")
 app.add_middleware(RequestLoggingMiddleware)
 
-# Initialize CUDA and model
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # React dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Initialize CUDA
 def setup_cuda():
     logger.info(f"Python version: {platform.python_version()}")
     logger.info(f"PyTorch version: {torch.__version__}")
@@ -78,101 +87,47 @@ def setup_cuda():
 device = setup_cuda()
 logger.info(f"Final device selection: {device}")
 
-try:
-    birefnet = BiRefNet.from_pretrained('zhengpeng7/BiRefNet')
-    birefnet.to(device)
-    birefnet.eval()
-    
-    if device == 'cuda':
-        birefnet.half()
-        torch.cuda.empty_cache()
-        logger.info(f"Model loaded on GPU. Memory allocated: {torch.cuda.memory_allocated()/1024**2:.2f}MB")
-        logger.info(f"Max memory allocated: {torch.cuda.max_memory_allocated()/1024**2:.2f}MB")
-        logger.info(f"Memory cached: {torch.cuda.memory_reserved()/1024**2:.2f}MB")
-    
-    logger.info("BiRefNet model loaded successfully")
-except Exception as e:
-    logger.error(f"Failed to load BiRefNet model: {str(e)}")
-    logger.error(f"Stack trace:", exc_info=True)
-    raise
-
-def extract_object(image: Image.Image):
-    try:
-        # Ensure image is in RGB mode
-        if image.mode == 'RGBA':
-            # Create a white background
-            background = Image.new('RGB', image.size, (255, 255, 255))
-            # Paste the image using itself as mask
-            background.paste(image, mask=image.split()[3])
-            image = background
-        elif image.mode != 'RGB':
-            image = image.convert('RGB')
-
-        # Data settings
-        transform_image = transforms.Compose([
-            transforms.Resize((1024, 1024)),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ])
-
-        input_images = transform_image(image).unsqueeze(0)
-        
-        # Ensure GPU usage and half precision
-        if device == 'cuda':
-            input_images = input_images.cuda().half()
-        else:
-            input_images = input_images.to(device)
-
-        # Prediction
-        with torch.no_grad():
-            torch.cuda.empty_cache()  # Clear GPU memory before inference
-            preds = birefnet(input_images)[-1].sigmoid().cpu()
-            
-        pred = preds[0].squeeze()
-        pred_pil = transforms.ToPILImage()(pred)
-        
-        # Apply refinement
-        image_masked = refine_foreground(image, pred_pil)
-        image_masked.putalpha(pred_pil.resize(image.size))
-        
-        # Clear GPU memory after processing
-        if device == 'cuda':
-            torch.cuda.empty_cache()
-            
-        return image_masked
-    except Exception as e:
-        logger.error(f"Error in extract_object: {str(e)}")
-        raise
-
 @app.post("/remove-background/")
-async def remove_background(file: UploadFile = File(...)):
-    logger.info(f"Processing image: {file.filename}")
+async def remove_background(
+    file: UploadFile = File(...),
+    model: str = Query("rmbg2", description="Model to use for background removal"),
+    enable_refinement: bool = Query(False, description="Enable refinement for supported models")
+):
+    logger.info(f"Processing image: {file.filename} with model: {model}")
     start_time = time.time()
     
     # Validate content type
     if not file.content_type.startswith('image/'):
         logger.error(f"Invalid content type: {file.content_type}")
-        return {"error": "File must be an image"}, 400
+        return JSONResponse(status_code=400, content={"error": "File must be an image"})
     
     try:
+        # Get model
+        bg_model = registry.get_model(model)
+        if bg_model is None:
+            return JSONResponse(
+                status_code=400, 
+                content={"error": f"Model {model} not available"}
+            )
+        
         # Read and process the image
         image_data = await file.read()
         if not image_data:
             logger.error("Received empty file")
-            return {"error": "Empty file received"}, 400
+            return JSONResponse(status_code=400, content={"error": "Empty file received"})
             
         try:
             image = Image.open(io.BytesIO(image_data))
         except Exception as e:
             logger.error(f"Failed to open image: {str(e)}")
-            return {"error": "Invalid image format"}, 400
+            return JSONResponse(status_code=400, content={"error": "Invalid image format"})
         
         # Convert to RGB if not already
         if image.mode not in ('RGB', 'RGBA'):
             image = image.convert('RGB')
         
         # Process the image
-        result_image = extract_object(image)
+        result_image = bg_model(image, enable_refinement=enable_refinement)
         
         # Save to bytes
         img_byte_arr = io.BytesIO()
@@ -190,7 +145,60 @@ async def remove_background(file: UploadFile = File(...)):
         return StreamingResponse(img_byte_arr, media_type="image/png", headers=headers)
     except Exception as e:
         logger.error(f"Error processing {file.filename}: {str(e)}")
-        return {"error": str(e)}, 500
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.get("/models")
+async def list_models():
+    """List all available background removal models and their status"""
+    return registry.get_available_models()
+
+@app.post("/models/{model_name}/load")
+async def load_model(model_name: str):
+    """Load a specific model into memory"""
+    model = registry.get_model(model_name, load=True)
+    if model is None:
+        return JSONResponse(
+            status_code=404,
+            content={"error": f"Model {model_name} not found"}
+        )
+    return {"status": "success", "model": model_name}
+
+@app.post("/models/{model_name}/unload")
+async def unload_model(model_name: str):
+    """Unload a specific model from memory"""
+    registry.unload_model(model_name)
+    return {"status": "success", "model": model_name}
+
+@app.get("/models/{model_name}/info")
+async def get_model_info(model_name: str):
+    """Get detailed information about a model's requirements and configuration"""
+    model = registry.get_model(model_name, load=True)
+    if model is None:
+        return JSONResponse(
+            status_code=404,
+            content={"error": f"Model {model_name} not found"}
+        )
+    
+    # Get model configuration and requirements
+    model_info = {
+        "metadata": model.metadata,
+        "device": model.device
+    }
+    
+    if hasattr(model, 'model') and hasattr(model.model, 'config'):
+        model_info["config"] = model.model.config
+    
+    return model_info
+
+@app.get("/health")
+async def health():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "cuda_available": torch.cuda.is_available(),
+        "device": device,
+        "models": registry.get_available_models()
+    }
 
 @app.get("/")
 async def root():

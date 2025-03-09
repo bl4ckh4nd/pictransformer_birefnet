@@ -13,3 +13,4 @@ kornia>=0.6.12
 einops>=0.7.0
 timm>=0.9.9
 opencv-python>=4.8.0
+ben2==0.1.0  # Added for BEN2 model support
