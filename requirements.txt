@@ -1,0 +1,15 @@
+--find-links https://download.pytorch.org/whl/cu124
+torch
+torchvision
+torchaudio
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart
+pillow==10.1.0
+transformers==4.35.2
+matplotlib==3.8.2
+numpy==1.26.2
+kornia>=0.6.12
+einops>=0.7.0
+timm>=0.9.9
+opencv-python>=4.8.0

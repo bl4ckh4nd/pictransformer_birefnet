@@ -1,0 +1,184 @@
+2025-02-17 14:20:16,773 - INFO - Using device: cpu
+2025-02-17 14:20:21,803 - INFO - BiRefNet model loaded successfully
+2025-02-17 14:20:50,679 - INFO - Using device: cpu
+2025-02-17 14:20:55,654 - INFO - BiRefNet model loaded successfully
+2025-02-17 14:21:22,610 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 14:21:22,619 - INFO - Processing image: 31332d0750de45f5a4ad08afcc785c5b.jpg
+2025-02-17 14:21:53,641 - INFO - Successfully processed 31332d0750de45f5a4ad08afcc785c5b.jpg in 31.02s
+2025-02-17 14:21:53,643 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 31.03s
+2025-02-17 14:24:50,529 - INFO - Method: GET Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 14:24:50,539 - INFO - Method: GET Path: /remove-background/ Status: 405 Duration: 0.00s
+2025-02-17 14:24:55,485 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 14:24:55,491 - INFO - Method: POST Path: /remove-background/ Status: 422 Duration: 0.00s
+2025-02-17 14:25:04,934 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 14:25:04,940 - INFO - Processing image: 31332d0750de45f5a4ad08afcc785c5b.jpg
+2025-02-17 14:25:31,714 - INFO - Successfully processed 31332d0750de45f5a4ad08afcc785c5b.jpg in 26.77s
+2025-02-17 14:25:31,715 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 26.78s
+2025-02-17 14:26:58,424 - ERROR - CUDA is not available. This will significantly impact performance!
+2025-02-17 14:26:58,425 - INFO - Using device: cpu
+2025-02-17 14:27:02,973 - INFO - BiRefNet model loaded successfully
+2025-02-17 14:36:49,765 - ERROR - CUDA is not available. This will significantly impact performance!
+2025-02-17 14:36:49,766 - INFO - Using device: cpu
+2025-02-17 14:36:54,545 - INFO - BiRefNet model loaded successfully
+2025-02-17 14:37:48,689 - INFO - Python version: 3.12.2
+2025-02-17 14:37:48,689 - INFO - PyTorch version: 2.6.0+cpu
+2025-02-17 14:37:48,690 - INFO - CUDA available: False
+2025-02-17 14:37:48,690 - INFO - CUDA version: Not available
+2025-02-17 14:37:48,691 - ERROR - CUDA is not available. This could be due to:
+2025-02-17 14:37:48,691 - ERROR - 1. No NVIDIA GPU present
+2025-02-17 14:37:48,692 - ERROR - 2. NVIDIA drivers not installed
+2025-02-17 14:37:48,692 - ERROR - 3. PyTorch not built with CUDA support
+2025-02-17 14:37:48,693 - ERROR - 4. CUDA toolkit not installed
+2025-02-17 14:37:48,693 - INFO - Final device selection: cpu
+2025-02-17 14:37:53,764 - INFO - BiRefNet model loaded successfully
+2025-02-17 14:42:40,378 - INFO - Python version: 3.12.2
+2025-02-17 14:42:40,379 - INFO - PyTorch version: 2.6.0+cpu
+2025-02-17 14:42:40,379 - INFO - CUDA available: False
+2025-02-17 14:42:40,379 - INFO - CUDA version: Not available
+2025-02-17 14:42:40,379 - ERROR - CUDA is not available. This could be due to:
+2025-02-17 14:42:40,381 - ERROR - 1. No NVIDIA GPU present
+2025-02-17 14:42:40,381 - ERROR - 2. NVIDIA drivers not installed
+2025-02-17 14:42:40,381 - ERROR - 3. PyTorch not built with CUDA support
+2025-02-17 14:42:40,382 - ERROR - 4. CUDA toolkit not installed
+2025-02-17 14:42:40,382 - INFO - Final device selection: cpu
+2025-02-17 14:42:45,839 - INFO - BiRefNet model loaded successfully
+2025-02-17 14:43:08,590 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 14:43:08,598 - INFO - Processing image: 31332d0750de45f5a4ad08afcc785c5b.jpg
+2025-02-17 14:43:39,046 - INFO - Successfully processed 31332d0750de45f5a4ad08afcc785c5b.jpg in 30.45s
+2025-02-17 14:43:39,047 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 30.45s
+2025-02-17 15:39:45,585 - INFO - Python version: 3.12.2
+2025-02-17 15:39:45,586 - INFO - PyTorch version: 2.6.0+cu124
+2025-02-17 15:39:45,629 - INFO - CUDA available: True
+2025-02-17 15:39:45,630 - INFO - CUDA version: 12.4
+2025-02-17 15:39:45,630 - INFO - Number of CUDA devices: 1
+2025-02-17 15:39:45,638 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-02-17 15:39:45,638 - INFO -   Memory: 8.00GB
+2025-02-17 15:39:45,639 - INFO -   CUDA Capability: 8.6
+2025-02-17 15:39:45,844 - INFO - CUDA test successful - tensor operation completed
+2025-02-17 15:39:45,845 - INFO - Final device selection: cuda
+2025-02-17 15:39:53,854 - INFO - Model loaded on GPU. Memory allocated: 442.87MB
+2025-02-17 15:39:53,855 - INFO - Max memory allocated: 851.77MB
+2025-02-17 15:39:53,856 - INFO - Memory cached: 582.00MB
+2025-02-17 15:39:53,856 - INFO - BiRefNet model loaded successfully
+2025-02-17 15:41:02,659 - INFO - Python version: 3.12.2
+2025-02-17 15:41:02,660 - INFO - PyTorch version: 2.6.0+cu124
+2025-02-17 15:41:02,698 - INFO - CUDA available: True
+2025-02-17 15:41:02,699 - INFO - CUDA version: 12.4
+2025-02-17 15:41:02,700 - INFO - Number of CUDA devices: 1
+2025-02-17 15:41:02,704 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-02-17 15:41:02,705 - INFO -   Memory: 8.00GB
+2025-02-17 15:41:02,705 - INFO -   CUDA Capability: 8.6
+2025-02-17 15:41:02,863 - INFO - CUDA test successful - tensor operation completed
+2025-02-17 15:41:02,863 - INFO - Final device selection: cuda
+2025-02-17 15:41:10,329 - INFO - Model loaded on GPU. Memory allocated: 442.87MB
+2025-02-17 15:41:10,330 - INFO - Max memory allocated: 851.77MB
+2025-02-17 15:41:10,331 - INFO - Memory cached: 582.00MB
+2025-02-17 15:41:10,331 - INFO - BiRefNet model loaded successfully
+2025-02-17 15:41:14,154 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:41:14,161 - INFO - Processing image: 31332d0750de45f5a4ad08afcc785c5b.jpg
+2025-02-17 15:41:14,171 - ERROR - Error in extract_object: name 'transforms' is not defined
+2025-02-17 15:41:14,171 - ERROR - Errror processing 31332d0750de45f5a4ad08afcc785c5b.jpg: name 'transforms' is not defined
+2025-02-17 15:41:37,887 - INFO - Python version: 3.12.2
+2025-02-17 15:41:37,888 - INFO - PyTorch version: 2.6.0+cu124
+2025-02-17 15:41:37,926 - INFO - CUDA available: True
+2025-02-17 15:41:37,927 - INFO - CUDA version: 12.4
+2025-02-17 15:41:37,927 - INFO - Number of CUDA devices: 1
+2025-02-17 15:41:37,931 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-02-17 15:41:37,931 - INFO -   Memory: 8.00GB
+2025-02-17 15:41:37,932 - INFO -   CUDA Capability: 8.6
+2025-02-17 15:41:38,086 - INFO - CUDA test successful - tensor operation completed
+2025-02-17 15:41:38,086 - INFO - Final device selection: cuda
+2025-02-17 15:41:43,330 - INFO - Model loaded on GPU. Memory allocated: 442.87MB
+2025-02-17 15:41:43,331 - INFO - Max memory allocated: 851.77MB
+2025-02-17 15:41:43,331 - INFO - Memory cached: 582.00MB
+2025-02-17 15:41:43,332 - INFO - BiRefNet model loaded successfully
+2025-02-17 15:41:45,423 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:41:45,429 - INFO - Processing image: 31332d0750de45f5a4ad08afcc785c5b.jpg
+2025-02-17 15:41:48,093 - INFO - Successfully processed 31332d0750de45f5a4ad08afcc785c5b.jpg in 2.66s
+2025-02-17 15:41:48,094 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 2.67s
+2025-02-17 15:42:12,569 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:42:12,590 - WARNING - Expected boundary character 45, got 97 at index 2
+2025-02-17 15:42:12,591 - INFO - Method: POST Path: /remove-background/ Status: 400 Duration: 0.00s
+2025-02-17 15:42:33,111 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:42:33,117 - WARNING - Expected boundary character 45, got 97 at index 2
+2025-02-17 15:42:33,118 - INFO - Method: POST Path: /remove-background/ Status: 400 Duration: 0.00s
+2025-02-17 15:43:00,150 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:43:00,154 - INFO - Processing image: bike.png
+2025-02-17 15:43:00,187 - ERROR - Error in extract_object: The size of tensor a (4) must match the size of tensor b (3) at non-singleton dimension 0
+2025-02-17 15:43:00,188 - ERROR - Errror processing bike.png: The size of tensor a (4) must match the size of tensor b (3) at non-singleton dimension 0
+2025-02-17 15:43:16,721 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:43:16,726 - INFO - Processing image: 31332d0750de45f5a4ad08afcc785c5b.jpg
+2025-02-17 15:43:17,389 - INFO - Successfully processed 31332d0750de45f5a4ad08afcc785c5b.jpg in 0.66s
+2025-02-17 15:43:17,390 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 0.66s
+2025-02-17 15:44:06,232 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:44:06,253 - INFO - Processing image: AbsoluteTeamsport_RheinPfalz_Bon.jpg
+2025-02-17 15:44:06,797 - INFO - Successfully processed AbsoluteTeamsport_RheinPfalz_Bon.jpg in 0.54s
+2025-02-17 15:44:06,797 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 0.55s
+2025-02-17 15:44:29,212 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:44:29,216 - INFO - Processing image: logo4_eger_rainer_ingenieurbuero.png
+2025-02-17 15:44:29,241 - ERROR - Error in extract_object: The size of tensor a (4) must match the size of tensor b (3) at non-singleton dimension 0
+2025-02-17 15:44:29,242 - ERROR - Errror processing logo4_eger_rainer_ingenieurbuero.png: The size of tensor a (4) must match the size of tensor b (3) at non-singleton dimension 0
+2025-02-17 15:46:13,938 - INFO - Python version: 3.12.2
+2025-02-17 15:46:13,938 - INFO - PyTorch version: 2.6.0+cu124
+2025-02-17 15:46:13,974 - INFO - CUDA available: True
+2025-02-17 15:46:13,974 - INFO - CUDA version: 12.4
+2025-02-17 15:46:13,975 - INFO - Number of CUDA devices: 1
+2025-02-17 15:46:13,981 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-02-17 15:46:13,982 - INFO -   Memory: 8.00GB
+2025-02-17 15:46:13,982 - INFO -   CUDA Capability: 8.6
+2025-02-17 15:46:14,158 - INFO - CUDA test successful - tensor operation completed
+2025-02-17 15:46:14,159 - INFO - Final device selection: cuda
+2025-02-17 15:46:21,463 - INFO - Model loaded on GPU. Memory allocated: 442.87MB
+2025-02-17 15:46:21,464 - INFO - Max memory allocated: 851.77MB
+2025-02-17 15:46:21,465 - INFO - Memory cached: 582.00MB
+2025-02-17 15:46:21,466 - INFO - BiRefNet model loaded successfully
+2025-02-17 15:46:31,381 - INFO - Python version: 3.12.2
+2025-02-17 15:46:31,381 - INFO - PyTorch version: 2.6.0+cu124
+2025-02-17 15:46:31,416 - INFO - CUDA available: True
+2025-02-17 15:46:31,417 - INFO - CUDA version: 12.4
+2025-02-17 15:46:31,418 - INFO - Number of CUDA devices: 1
+2025-02-17 15:46:31,422 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-02-17 15:46:31,423 - INFO -   Memory: 8.00GB
+2025-02-17 15:46:31,423 - INFO -   CUDA Capability: 8.6
+2025-02-17 15:46:31,583 - INFO - CUDA test successful - tensor operation completed
+2025-02-17 15:46:31,584 - INFO - Final device selection: cuda
+2025-02-17 15:46:37,461 - INFO - Model loaded on GPU. Memory allocated: 442.87MB
+2025-02-17 15:46:37,462 - INFO - Max memory allocated: 851.77MB
+2025-02-17 15:46:37,463 - INFO - Memory cached: 582.00MB
+2025-02-17 15:46:37,464 - INFO - BiRefNet model loaded successfully
+2025-02-17 15:46:37,480 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:46:37,485 - INFO - Processing image: logo4_eger_rainer_ingenieurbuero.png
+2025-02-17 15:46:40,222 - INFO - Successfully processed logo4_eger_rainer_ingenieurbuero.png in 2.74s
+2025-02-17 15:46:40,223 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 2.74s
+2025-02-17 15:46:51,649 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:46:51,654 - WARNING - Expected boundary character 45, got 230 at index 2
+2025-02-17 15:46:51,655 - INFO - Method: POST Path: /remove-background/ Status: 400 Duration: 0.00s
+2025-02-17 15:51:24,799 - INFO - Python version: 3.12.2
+2025-02-17 15:51:24,800 - INFO - PyTorch version: 2.6.0+cu124
+2025-02-17 15:51:24,834 - INFO - CUDA available: True
+2025-02-17 15:51:24,834 - INFO - CUDA version: 12.4
+2025-02-17 15:51:24,835 - INFO - Number of CUDA devices: 1
+2025-02-17 15:51:24,839 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-02-17 15:51:24,839 - INFO -   Memory: 8.00GB
+2025-02-17 15:51:24,840 - INFO -   CUDA Capability: 8.6
+2025-02-17 15:51:24,979 - INFO - CUDA test successful - tensor operation completed
+2025-02-17 15:51:24,980 - INFO - Final device selection: cuda
+2025-02-17 15:51:30,563 - INFO - Model loaded on GPU. Memory allocated: 442.87MB
+2025-02-17 15:51:30,563 - INFO - Max memory allocated: 851.77MB
+2025-02-17 15:51:30,564 - INFO - Memory cached: 582.00MB
+2025-02-17 15:51:30,565 - INFO - BiRefNet model loaded successfully
+2025-02-17 15:51:32,236 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:51:32,241 - WARNING - Expected boundary character 45, got 97 at index 2
+2025-02-17 15:51:32,242 - INFO - Method: POST Path: /remove-background/ Status: 400 Duration: 0.00s
+2025-02-17 15:53:44,536 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:53:44,541 - INFO - Processing image: signal-2023-02-04-212737.jpeg
+2025-02-17 15:53:47,810 - INFO - Successfully processed signal-2023-02-04-212737.jpeg in 3.27s
+2025-02-17 15:53:47,811 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 3.27s
+2025-02-17 15:54:42,011 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 15:54:42,017 - INFO - Processing image: 0_0.jpeg
+2025-02-17 15:54:43,135 - INFO - Successfully processed 0_0.jpeg in 1.12s
+2025-02-17 15:54:43,137 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 1.12s
+2025-02-17 16:19:14,378 - INFO - Method: POST Path: /remove-background Status: 307 Duration: 0.00s
+2025-02-17 16:19:14,384 - INFO - Processing image: omnitraklogo.png
+2025-02-17 16:19:14,936 - INFO - Successfully processed omnitraklogo.png in 0.55s
+2025-02-17 16:19:14,937 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 0.56s
