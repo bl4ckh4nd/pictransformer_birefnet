@@ -1,24 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Paper, Typography, Fade, useTheme, useMediaQuery } from '@mui/material';
 import ImageTransformControls from './ImageTransformControls';
 
 interface ImageComparisonProps {
   originalImage: string | null;
   processedImage: string | null;
+  rotation: number;
+  flipH: boolean;
+  flipV: boolean;
+  brightness: number;
+  contrast: number;
+  saturation: number;
+  onRotate: (degrees: number) => void;
+  onFlipHorizontal: () => void;
+  onFlipVertical: () => void;
+  onBrightnessChange: (value: number) => void;
+  onContrastChange: (value: number) => void;
+  onSaturationChange: (value: number) => void;
+  onReset: () => void;
 }
 
 const ImageComparison: React.FC<ImageComparisonProps> = ({
   originalImage,
   processedImage,
+  rotation,
+  flipH,
+  flipV,
+  brightness,
+  contrast,
+  saturation,
+  onRotate,
+  onFlipHorizontal,
+  onFlipVertical,
+  onBrightnessChange,
+  onContrastChange,
+  onSaturationChange,
+  onReset,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [rotation, setRotation] = useState(0);
-  const [flipH, setFlipH] = useState(false);
-  const [flipV, setFlipV] = useState(false);
-  const [brightness, setBrightness] = useState(0);
-  const [contrast, setContrast] = useState(0);
-  const [saturation, setSaturation] = useState(0);
 
   const imageStyle = {
     maxWidth: '100%',
@@ -33,27 +53,6 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
       saturate(${100 + saturation}%)
     `,
     transition: 'transform 0.3s ease, filter 0.3s ease',
-  };
-
-  const handleRotate = (degrees: number) => {
-    setRotation((prev) => (prev + degrees) % 360);
-  };
-
-  const handleFlipHorizontal = () => {
-    setFlipH((prev) => !prev);
-  };
-
-  const handleFlipVertical = () => {
-    setFlipV((prev) => !prev);
-  };
-
-  const handleReset = () => {
-    setRotation(0);
-    setFlipH(false);
-    setFlipV(false);
-    setBrightness(0);
-    setContrast(0);
-    setSaturation(0);
   };
 
   return (
@@ -168,13 +167,13 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
         <Fade in={!!processedImage} timeout={1000}>
           <Box sx={{ width: '100%', maxWidth: 800 }}>
             <ImageTransformControls
-              onRotate={handleRotate}
-              onFlipHorizontal={handleFlipHorizontal}
-              onFlipVertical={handleFlipVertical}
-              onBrightnessChange={setBrightness}
-              onContrastChange={setContrast}
-              onSaturationChange={setSaturation}
-              onReset={handleReset}
+              onRotate={onRotate}
+              onFlipHorizontal={onFlipHorizontal}
+              onFlipVertical={onFlipVertical}
+              onBrightnessChange={onBrightnessChange}
+              onContrastChange={onContrastChange}
+              onSaturationChange={onSaturationChange}
+              onReset={onReset}
               brightness={brightness}
               contrast={contrast}
               saturation={saturation}

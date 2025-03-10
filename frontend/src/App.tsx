@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Container,
   Box,
@@ -31,6 +31,14 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
+
+  // Add state for tracking transformations at the App level
+  const [rotation, setRotation] = useState(0);
+  const [flipH, setFlipH] = useState(false);
+  const [flipV, setFlipV] = useState(false);
+  const [brightness, setBrightness] = useState(0);
+  const [contrast, setContrast] = useState(0);
+  const [saturation, setSaturation] = useState(0);
 
   useEffect(() => {
     loadModels();
@@ -99,15 +107,101 @@ function App() {
     }
   };
 
+  // Update your handleDownload function to apply transformations
   const handleDownload = () => {
     if (processedImage) {
-      const link = document.createElement('a');
-      link.href = processedImage;
-      link.download = 'processed-image.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = () => {
+        // Set canvas size
+        canvas.width = img.width;
+        canvas.height = img.height;
+        
+        if (!ctx) return;
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Apply transformations
+        ctx.save();
+        
+        // Move to center point for transformations
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        
+        // Apply rotation
+        ctx.rotate((rotation * Math.PI) / 180);
+        
+        // Apply flips
+        ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
+        
+        // Draw the image (centered)
+        ctx.drawImage(img, -img.width / 2, -img.height / 2, img.width, img.height);
+        
+        // Apply filters
+        if (brightness !== 0 || contrast !== 0 || saturation !== 0) {
+          // Create a temporary canvas for filter effects
+          const tempCanvas = document.createElement('canvas');
+          tempCanvas.width = canvas.width;
+          tempCanvas.height = canvas.height;
+          const tempCtx = tempCanvas.getContext('2d');
+          
+          if (tempCtx) {
+            // Copy from main canvas to temp canvas
+            tempCtx.drawImage(canvas, 0, 0);
+            
+            // Apply filters
+            ctx.filter = `brightness(${100 + brightness}%) contrast(${100 + contrast}%) saturate(${100 + saturation}%)`;
+            
+            // Draw back to main canvas with filters
+            ctx.drawImage(tempCanvas, -canvas.width / 2, -canvas.height / 2);
+          }
+        }
+        
+        ctx.restore();
+        
+        // Convert to blob and download
+        canvas.toBlob((blob) => {
+          if (!blob) return;
+          
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'processed-image.png';
+          document.body.appendChild(link);
+          link.click();
+          
+          // Clean up - ONLY REMOVE ONCE
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }, 'image/png');
+      };
+      
+      img.src = processedImage;
     }
+  };
+
+  // Handler functions for image transformations
+  const handleRotate = (degrees: number) => {
+    setRotation((prev) => (prev + degrees) % 360);
+  };
+
+  const handleFlipHorizontal = () => {
+    setFlipH((prev) => !prev);
+  };
+
+  const handleFlipVertical = () => {
+    setFlipV((prev) => !prev);
+  };
+
+  const handleReset = () => {
+    setRotation(0);
+    setFlipH(false);
+    setFlipV(false);
+    setBrightness(0);
+    setContrast(0);
+    setSaturation(0);
   };
 
   return (
@@ -279,6 +373,20 @@ function App() {
             <ImageComparison
               originalImage={originalImage}
               processedImage={processedImage}
+              // Pass transformation values and handlers
+              rotation={rotation}
+              flipH={flipH}
+              flipV={flipV}
+              brightness={brightness}
+              contrast={contrast}
+              saturation={saturation}
+              onRotate={handleRotate}
+              onFlipHorizontal={handleFlipHorizontal}
+              onFlipVertical={handleFlipVertical}
+              onBrightnessChange={setBrightness}
+              onContrastChange={setContrast}
+              onSaturationChange={setSaturation}
+              onReset={handleReset}
             />
             
             <Box 
