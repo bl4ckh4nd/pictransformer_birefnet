@@ -2888,3 +2888,24 @@ AttributeError: 'list' object has no attribute 'logits'
 2025-03-10 12:15:27,658 - INFO - CUDA test successful - tensor operation completed
 2025-03-10 12:15:27,659 - INFO - Final device selection: cuda
 2025-03-10 12:15:27,792 - INFO - Starting Background Removal API server
+2025-03-10 12:16:11,288 - INFO - Processing image: signal-2023-02-04-212737.jpeg with model: rmbg2
+2025-03-10 12:16:11,289 - INFO - Starting model download and loading process...
+2025-03-10 12:16:11,466 - INFO - Successfully downloaded BiRefNet_config.py to C:\Users\Merres\Documents\Coding\pictransformer_birefnet\models\..\downloaded_models\rmbg2\models--briaai--RMBG-2.0\snapshots\8466043b7b29ea0e0d1f4cc95b2bca1f5fcf8ae0\BiRefNet_config.py
+2025-03-10 12:16:11,629 - INFO - Successfully downloaded birefnet.py to C:\Users\Merres\Documents\Coding\pictransformer_birefnet\models\..\downloaded_models\rmbg2\models--briaai--RMBG-2.0\snapshots\8466043b7b29ea0e0d1f4cc95b2bca1f5fcf8ae0\birefnet.py
+2025-03-10 12:16:11,792 - INFO - Successfully downloaded config.json to C:\Users\Merres\Documents\Coding\pictransformer_birefnet\models\..\downloaded_models\rmbg2\models--briaai--RMBG-2.0\snapshots\8466043b7b29ea0e0d1f4cc95b2bca1f5fcf8ae0\config.json
+2025-03-10 12:16:11,919 - INFO - Successfully downloaded model.safetensors to C:\Users\Merres\Documents\Coding\pictransformer_birefnet\models\..\downloaded_models\rmbg2\models--briaai--RMBG-2.0\snapshots\8466043b7b29ea0e0d1f4cc95b2bca1f5fcf8ae0\model.safetensors
+2025-03-10 12:16:14,369 - INFO - Converting state_dict to half precision before loading
+2025-03-10 12:16:14,735 - INFO - Model loaded successfully
+2025-03-10 12:16:15,180 - INFO - Model moved to device: cuda
+2025-03-10 12:16:15,181 - INFO - Model set to eval mode
+2025-03-10 12:16:15,245 - INFO - Model converted to half precision with all tensors and buffers checked
+2025-03-10 12:16:15,246 - INFO - Created new instance of rmbg2
+2025-03-10 12:16:15,354 - INFO - Model memory format: True
+2025-03-10 12:16:15,377 - INFO - After preprocess - tensor dtype: torch.float16, device: cuda:0
+2025-03-10 12:16:15,377 - INFO - Tensor requires grad: False
+2025-03-10 12:16:15,377 - INFO - Tensor memory format: True
+2025-03-10 12:16:15,378 - INFO - Final tensor stats - dtype: torch.float16, shape: torch.Size([1, 3, 1024, 1024]), device: cuda:0
+2025-03-10 12:16:15,378 - INFO - Predict input tensor dtype: torch.float16
+2025-03-10 12:16:15,379 - INFO - After explicit half conversion dtype: torch.float16
+2025-03-10 12:16:17,782 - INFO - Successfully processed signal-2023-02-04-212737.jpeg in 6.49s
+2025-03-10 12:16:17,838 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 6.55s
