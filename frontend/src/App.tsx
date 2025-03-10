@@ -84,6 +84,14 @@ function App() {
     setProcessedImage(null);
     const imageUrl = URL.createObjectURL(file);
     setOriginalImage(imageUrl);
+
+    // Reset all transformation states
+    setRotation(0);
+    setFlipH(false);
+    setFlipV(false);
+    setBrightness(0);
+    setContrast(0);
+    setSaturation(0);
   };
 
   const handleProcess = async () => {
