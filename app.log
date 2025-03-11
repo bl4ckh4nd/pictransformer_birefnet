@@ -2914,3 +2914,4 @@ AttributeError: 'list' object has no attribute 'logits'
 2025-03-10 14:12:28,879 - INFO - Method: GET Path: /favicon.ico Status: 404 Duration: 0.00s
 2025-03-10 14:12:29,772 - INFO - Method: GET Path: /sitemap.xml Status: 404 Duration: 0.00s
 2025-03-10 14:12:30,727 - INFO - Method: GET Path: /robots.txt Status: 404 Duration: 0.00s
+2025-03-10 18:59:43,747 - INFO - Method: GET Path: / Status: 200 Duration: 0.02s
