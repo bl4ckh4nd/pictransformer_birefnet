@@ -15,10 +15,10 @@ import {
   Tooltip,
 } from '@mui/material';
 import { Check, HelpCircle, Zap } from 'lucide-react';
-import { ModelInfo } from '../services/api';
+import { ModelsResponse } from '../services/api';
 
 interface ModelSelectorProps {
-  models: Record<string, ModelInfo>;
+  models: ModelsResponse;
   selectedModel: string;
   enableRefinement: boolean;
   onModelChange: (model: string) => void;

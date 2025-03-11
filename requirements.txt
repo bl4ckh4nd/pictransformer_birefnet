@@ -1,18 +1,19 @@
 --find-links https://download.pytorch.org/whl/cu124
-torch
-torchvision
+torch==2.2.0
+torchvision==0.17.0
 torchaudio
 fastapi==0.104.1
 uvicorn==0.24.0
-python-multipart
-pillow==10.1.0
-transformers==4.35.2
+python-multipart==0.0.6
+pillow==10.2.0
+transformers==4.38.2
 matplotlib==3.8.2
 numpy==1.26.2
 kornia>=0.6.12
 einops>=0.7.0
 timm>=0.9.9
 opencv-python>=4.8.0
-safetensors>=0.4.1
-#ben2==0.1.0  # Added for BEN2 model support
-huggingface_hub>=0.19.0  # Added for direct model file downloads
+safetensors==0.4.2
+huggingface_hub==0.20.3
+pydantic==2.4.2
+modal==0.55.4290
