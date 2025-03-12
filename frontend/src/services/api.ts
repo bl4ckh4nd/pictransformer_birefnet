@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export interface HealthResponse {
+  status: string;
+  version: string;
+}
+
 export interface ModelsResponse {
   [key: string]: {
     loaded: boolean;
@@ -7,15 +12,45 @@ export interface ModelsResponse {
   };
 }
 
+export interface AvailableModelsResponse {
+  models: string[];
+}
+
+export interface BatchProcessRequest {
+  images: string[];
+  model: string;
+  enable_refinement?: boolean;
+}
+
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const api = {
+  async checkHealth(): Promise<HealthResponse> {
+    try {
+      const response = await axios.get(`${API_BASE_URL}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error checking health:', error);
+      throw error;
+    }
+  },
+
   async getModels(): Promise<ModelsResponse> {
     try {
-      const response = await axios.get(`${API_BASE_URL}/models`);
+      const response = await axios.get(`${API_BASE_URL}`);
       return response.data.models || {};
     } catch (error) {
       console.error('Error fetching models:', error);
+      throw error;
+    }
+  },
+
+  async getAvailableModels(): Promise<string[]> {
+    try {
+      const response = await axios.get(`${API_BASE_URL}`);
+      return response.data.models || [];
+    } catch (error) {
+      console.error('Error fetching available models:', error);
       throw error;
     }
   },
@@ -54,14 +89,43 @@ const api = {
         throw new Error(response.data.error);
       }
       
-      const imgBlob = base64ToBlob(
-        response.data.processed_image,
-        'image/png'
-      );
-      
-      return imgBlob;
+      return base64ToBlob(response.data.processed_image, 'image/png');
     } catch (error) {
       console.error('Error removing background:', error);
+      throw error;
+    }
+  },
+
+  async removeBackgroundBatch(
+    files: File[],
+    modelName: string = 'rmbg2',
+    enableRefinement: boolean = false
+  ): Promise<Blob[]> {
+    try {
+      const base64Images = await Promise.all(files.map(file => fileToBase64(file)));
+      const base64Data = base64Images.map(base64 => base64.split(',')[1]);
+      
+      const response = await axios.post(
+        `${API_BASE_URL}/remove-background/batch`,
+        {
+          images: base64Data,
+          model: modelName,
+          enable_refinement: enableRefinement
+        },
+        {
+          timeout: 300000, // 5 minutes timeout for batch processing
+        }
+      );
+      
+      if (response.data.error) {
+        throw new Error(response.data.error);
+      }
+      
+      return response.data.processed_images.map((img: string) => 
+        base64ToBlob(img, 'image/png')
+      );
+    } catch (error) {
+      console.error('Error removing background in batch:', error);
       throw error;
     }
   }

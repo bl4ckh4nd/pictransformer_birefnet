@@ -1,7 +1,7 @@
 import modal
 import base64
 from pydantic import BaseModel
-from typing import Dict, Any
+from typing import Dict, Any, List
 from modal_gpu_service import app, BackgroundRemovalService
 from models.rmbg import RMBG2Model
 from models.ben2 import BEN2Model
@@ -21,7 +21,7 @@ class ImageRequest(BaseModel):
     enable_refinement: bool = False
 
 # Create a web endpoint using the fastapi_endpoint decorator (replacing deprecated web_endpoint)
-@app.function(timeout=2)
+@app.function(timeout=10)
 @modal.fastapi_endpoint(method="GET")
 def health():
     """Health check endpoint"""
@@ -66,6 +66,30 @@ def load_model(model_name: str):
         if not success:
             return {"error": f"Model {model_name} not found", "status": "failed"}
         return {"status": "success", "model": model_name}
+    except Exception as e:
+        return {"error": str(e), "status": "failed"}
+    
+@app.function(timeout=10)
+@modal.fastapi_endpoint(method="POST")
+async def remove_background_batch(requests: List[ImageRequest]):
+    """Process multiple images in a batch"""
+    try:
+        batch_inputs = []
+        for req in requests:
+            image_bytes = base64.b64decode(req.image)
+            batch_inputs.append((image_bytes, req.model, req.enable_refinement))
+        
+        gpu_service = BackgroundRemovalService()
+        # Process batch
+        results = gpu_service.process_images_batch.remote(batch_inputs)
+        
+        # Encode results
+        encoded_results = [base64.b64encode(res).decode('utf-8') for res in results]
+        
+        return {
+            "status": "success",
+            "processed_images": encoded_results
+        }
     except Exception as e:
         return {"error": str(e), "status": "failed"}
 
@@ -141,5 +165,9 @@ def fastapi_app():
     @app.post("/remove-background")
     async def api_remove_background(request: ImageRequest):
         return remove_background.remote(request)
+    
+    @app.post("/remove-background-batch")
+    async def api_remove_background_batch(requests: List[ImageRequest]):
+        return remove_background_batch.remote(requests)
     
     return app

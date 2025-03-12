@@ -47,7 +47,7 @@ image = (modal.Image.debian_slim()
 app = modal.App("background-removal-service", image=image)
 model_cache = modal.Volume.from_name("model-cache-volume", create_if_missing=True)
 
-@app.cls(gpu="T4", volumes={"/model_cache": model_cache})
+@app.cls(gpu="T4", volumes={"/model_cache": model_cache}, allow_concurrent_inputs=4)
 class BackgroundRemovalService:
     AVAILABLE_MODELS = {
         "rmbg2": RMBG2Model,
@@ -55,6 +55,17 @@ class BackgroundRemovalService:
         "birefnet": BiRefNetModel
     }
     
+    @modal.enter()
+    def preload_models(self):
+        """Preload all models when container starts to avoid loading delays during processing"""
+        print("Preloading all background removal models...")
+        for model_name in self.AVAILABLE_MODELS.keys():
+            try:
+                self._get_model(model_name, load=True)
+                print(f"✓ Successfully loaded {model_name}")
+            except Exception as e:
+                print(f"✗ Failed to load {model_name}: {str(e)}")
+
     def __init__(self):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self._model_instances: Dict[str, Any] = {}
@@ -245,3 +256,31 @@ class BackgroundRemovalService:
                 return None
                 
         return self._model_instances[model_name]
+    
+    @modal.method()
+    def process_images_batch(self, images_data):
+        """Process multiple images in a single GPU pass"""
+        results = []
+        
+        for data in images_data:
+            image_bytes, model_name, enable_refinement = data
+            result = self.process_single_image(image_bytes, model_name, enable_refinement)
+            results.append(result)
+            
+        return results
+        
+    def process_single_image(self, image_bytes, model_name, enable_refinement):
+        """Helper method for batch processing"""
+        image = Image.open(io.BytesIO(image_bytes))
+        if image.mode not in ('RGB', 'RGBA'):
+            image = image.convert('RGB')
+        
+        bg_model = self._get_model(model_name)
+        if bg_model is None:
+            raise ValueError(f"Model {model_name} not available")
+        
+        result_image = bg_model(image, enable_refinement=enable_refinement)
+        
+        buffer = io.BytesIO()
+        result_image.save(buffer, format="PNG")
+        return buffer.getvalue()
