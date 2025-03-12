@@ -21,13 +21,13 @@ class ImageRequest(BaseModel):
     enable_refinement: bool = False
 
 # Create a web endpoint using the fastapi_endpoint decorator (replacing deprecated web_endpoint)
-@app.function(timeout=300)
+@app.function(timeout=2)
 @modal.fastapi_endpoint(method="GET")
 def health():
     """Health check endpoint"""
     return {"status": "healthy"}
 
-@app.function(timeout=60)
+@app.function(timeout=10)
 @modal.fastapi_endpoint(method="GET")
 def models():
     """List all available models endpoint"""
@@ -41,7 +41,7 @@ def models():
     except Exception as e:
         return {"error": str(e), "status": "failed"}
 
-@app.function(timeout=60)
+@app.function(timeout=10)
 @modal.fastapi_endpoint(method="GET")
 def available_models():
     """CPU-side endpoint that just returns the list of model names"""
@@ -53,7 +53,7 @@ def available_models():
     except Exception as e:
         return {"error": str(e), "status": "failed"}
 
-@app.function(timeout=300)
+@app.function(timeout=10)
 @modal.fastapi_endpoint(method="POST")
 def load_model(model_name: str):
     """Load a specific model endpoint"""
@@ -69,7 +69,7 @@ def load_model(model_name: str):
     except Exception as e:
         return {"error": str(e), "status": "failed"}
 
-@app.function(timeout=300)
+@app.function(timeout=10)
 @modal.fastapi_endpoint(method="POST")
 def remove_background(request: ImageRequest):
     """Process an image to remove the background endpoint"""
@@ -101,7 +101,7 @@ def remove_background(request: ImageRequest):
         return {"error": str(e), "status": "failed"}
 
 # Main ASGI wrapper to create a FastAPI-compatible interface (optional)
-@app.function(timeout=300)
+@app.function(timeout=10)
 @modal.asgi_app()
 def fastapi_app():
     from fastapi import FastAPI
