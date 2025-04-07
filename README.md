@@ -155,8 +155,8 @@ You can run the application locally using the provided scripts/manual steps, or 
 
 Models are defined in the `models/` directory and managed by `models/registry.py`. Models are downloaded on demand (or when explicitly loaded via the API) into the `downloaded_models/` directory (by default).
 
-*(Add any specific notes about adding or configuring models here)*
+
 
 ## Deployment
 
-*(Add details about how your application is deployed, e.g., using Modal for the API and Vercel for the frontend)*
+
