@@ -3103,3 +3103,149 @@ AttributeError: 'list' object has no attribute 'logits'
 2025-04-07 13:47:59,869 - INFO - Method: GET Path: /models Status: 200 Duration: 0.25s
 2025-04-07 13:47:59,927 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
 2025-04-07 13:48:07,686 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 15:39:33,864 - INFO - Method: GET Path: /models Status: 200 Duration: 0.01s
+2025-04-07 15:39:33,879 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 16:35:06,638 - INFO - Model configuration: Config {
+  "IoU_finetune_last_epochs": -50,
+  "SDPA_enabled": false,
+  "auxiliary_classification": false,
+  "batch_size": 4,
+  "batch_size_valid": 1,
+  "bb": "swin_v1_l",
+  "compile": true,
+  "cxt": [
+    384,
+    768,
+    1536
+  ],
+  "cxt_num": 3,
+  "data_root_dir": "C:\\Users\\Merres\\datasets/dis",
+  "dec_att": "ASPPDeformable",
+  "dec_blk": "BasicDecBlk",
+  "dec_channels_inter": "fixed",
+  "dec_ipt": true,
+  "dec_ipt_split": true,
+  "device": 0,
+  "ender": "",
+  "freeze_bb": false,
+  "lambda_adv_d": 0.0,
+  "lambda_adv_g": 0.0,
+  "lambdas_cls": {
+    "ce": 5.0
+  },
+  "lambdas_pix_last": {
+    "bce": 30,
+    "cnt": 0,
+    "iou": 0.5,
+    "iou_patch": 0.0,
+    "mse": 0,
+    "reg": 0,
+    "ssim": 10,
+    "structure": 0,
+    "triplet": 0
+  },
+  "lat_blk": "BasicLatBlk",
+  "lateral_channels_in_collection": [
+    3072,
+    1536,
+    768,
+    384
+  ],
+  "load_all": true,
+  "lr": 0.0001,
+  "lr_decay_epochs": [
+    100000.0
+  ],
+  "lr_decay_rate": 0.5,
+  "model": "BiRefNet",
+  "ms_supervision": true,
+  "mul_scl_ipt": "cat",
+  "num_workers": 4,
+  "only_S_MAE": false,
+  "optimizer": "AdamW",
+  "out_ref": true,
+  "precisionHigh": true,
+  "preproc_methods": [
+    "flip",
+    "enhance",
+    "rotate",
+    "pepper"
+  ],
+  "progressive_ref": "",
+  "prompt4loc": "dense",
+  "rand_seed": 7,
+  "refine": "",
+  "refine_iteration": 1,
+  "scale": "",
+  "size": 1024,
+  "squeeze_block": "BasicDecBlk_x1",
+  "sys_home_dir": "C:\\Users\\Merres",
+  "task": "DIS5K",
+  "training_set": "DIS-TR",
+  "transformers_version": "4.35.2",
+  "use_fp16": false,
+  "verbose_eval": true,
+  "weights": {
+    "pvt_v2_b0": "C:\\Users\\Merres\\weights\\pvt_v2_b0.pth",
+    "pvt_v2_b1": "C:\\Users\\Merres\\weights\\pvt_v2_b1.pth",
+    "pvt_v2_b2": "C:\\Users\\Merres\\weights\\pvt_v2_b2.pth",
+    "pvt_v2_b5": "C:\\Users\\Merres\\weights\\pvt_v2_b5.pth",
+    "swin_v1_b": "C:\\Users\\Merres\\weights\\swin_base_patch4_window12_384_22kto1k.pth",
+    "swin_v1_l": "C:\\Users\\Merres\\weights\\swin_large_patch4_window12_384_22kto1k.pth",
+    "swin_v1_s": "C:\\Users\\Merres\\weights\\swin_small_patch4_window7_224_22kto1k_finetune.pth",
+    "swin_v1_t": "C:\\Users\\Merres\\weights\\swin_tiny_patch4_window7_224_22kto1k_finetune.pth"
+  },
+  "weights_root_dir": "C:\\Users\\Merres\\weights"
+}
+
+2025-04-07 16:35:06,695 - INFO - Created new instance of birefnet
+2025-04-07 16:35:06,696 - INFO - Method: POST Path: /models/birefnet/load Status: 200 Duration: 124.30s
+2025-04-07 16:35:06,706 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 16:38:30,862 - INFO - Processing image: 37acbffff86e4af8a9527afea5a9c45e.webp with model: birefnet
+2025-04-07 16:38:30,984 - INFO - Original image size: (300, 433), mode: RGB
+2025-04-07 16:38:30,984 - INFO - Resizing image from (300, 433) to (320, 448) to ensure dimensions are multiples of 32
+2025-04-07 16:38:30,992 - INFO - Expected patch count: 10x14, patch size: 32x32
+2025-04-07 16:38:30,992 - INFO - Expected flattened patch dimension: 3072 channels
+2025-04-07 16:38:31,010 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 448, 320])
+2025-04-07 16:38:31,010 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-04-07 16:38:31,012 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 448, 320])
+2025-04-07 16:38:31,986 - INFO - Prediction successful, output shape: torch.Size([1, 1, 448, 320])
+2025-04-07 16:38:32,035 - INFO - Successfully processed 37acbffff86e4af8a9527afea5a9c45e.webp in 1.17s
+2025-04-07 16:38:32,037 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 1.18s
+2025-04-07 16:39:00,026 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 16:39:00,036 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 16:39:03,344 - INFO - Method: POST Path: /models/birefnet/load Status: 200 Duration: 0.00s
+2025-04-07 16:39:03,418 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 16:39:36,556 - INFO - Processing image: 37acbffff86e4af8a9527afea5a9c45e.webp with model: birefnet
+2025-04-07 16:39:36,557 - INFO - Original image size: (300, 433), mode: RGB
+2025-04-07 16:39:36,557 - INFO - Resizing image from (300, 433) to (320, 448) to ensure dimensions are multiples of 32
+2025-04-07 16:39:36,563 - INFO - Expected patch count: 10x14, patch size: 32x32
+2025-04-07 16:39:36,564 - INFO - Expected flattened patch dimension: 3072 channels
+2025-04-07 16:39:36,567 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 448, 320])
+2025-04-07 16:39:36,568 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-04-07 16:39:36,569 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 448, 320])
+2025-04-07 16:39:36,753 - INFO - Prediction successful, output shape: torch.Size([1, 1, 448, 320])
+2025-04-07 16:39:36,792 - INFO - Successfully processed 37acbffff86e4af8a9527afea5a9c45e.webp in 0.24s
+2025-04-07 16:39:36,793 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 0.24s
+2025-04-07 16:39:58,709 - INFO - Processing image: d1ea01a368094173a7aa02d60a8ad100.webp with model: birefnet
+2025-04-07 16:39:58,709 - INFO - Original image size: (300, 433), mode: RGB
+2025-04-07 16:39:58,711 - INFO - Resizing image from (300, 433) to (320, 448) to ensure dimensions are multiples of 32
+2025-04-07 16:39:58,716 - INFO - Expected patch count: 10x14, patch size: 32x32
+2025-04-07 16:39:58,717 - INFO - Expected flattened patch dimension: 3072 channels
+2025-04-07 16:39:58,720 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 448, 320])
+2025-04-07 16:39:58,721 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-04-07 16:39:58,722 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 448, 320])
+2025-04-07 16:39:58,915 - INFO - Prediction successful, output shape: torch.Size([1, 1, 448, 320])
+2025-04-07 16:39:58,967 - INFO - Successfully processed d1ea01a368094173a7aa02d60a8ad100.webp in 0.26s
+2025-04-07 16:39:58,969 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 0.26s
+2025-04-07 16:40:07,027 - INFO - Processing image: dbfd82f0b4d146138ca60ccb0ad1fe94.webp with model: birefnet
+2025-04-07 16:40:07,028 - INFO - Original image size: (1801, 2600), mode: RGB
+2025-04-07 16:40:07,029 - INFO - Resizing image from (1801, 2600) to (1824, 2624) to ensure dimensions are multiples of 32
+2025-04-07 16:40:07,333 - INFO - Expected patch count: 57x82, patch size: 32x32
+2025-04-07 16:40:07,333 - INFO - Expected flattened patch dimension: 3072 channels
+2025-04-07 16:40:07,506 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 2624, 1824])
+2025-04-07 16:40:07,506 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-04-07 16:40:07,525 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 2624, 1824])
+2025-04-07 16:40:23,328 - INFO - Prediction successful, output shape: torch.Size([1, 1, 2624, 1824])
+2025-04-07 16:40:27,231 - INFO - Successfully processed dbfd82f0b4d146138ca60ccb0ad1fe94.webp in 20.20s
+2025-04-07 16:40:27,241 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 20.22s
