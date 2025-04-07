@@ -18,10 +18,13 @@ import { Download, Image as ImageIcon, AlertTriangle } from 'lucide-react';
 import ImageUpload from './components/ImageUpload';
 import ModelSelector from './components/ModelSelector';
 import ImageComparison from './components/ImageComparison';
+import LanguageSwitcher from './components/LanguageSwitcher'; // Import LanguageSwitcher
+import { useLanguage } from './contexts/LanguageContext'; // Import useLanguage
 import api, { ModelsResponse } from './services/api';
 
 function App() {
   const theme = useTheme();
+  const { t } = useLanguage(); // Get translation function
   const [models, setModels] = useState<ModelsResponse>({});
   const [selectedModel, setSelectedModel] = useState('rmbg2');
   const [enableRefinement, setEnableRefinement] = useState(false);
@@ -228,10 +231,11 @@ function App() {
       
       <Container maxWidth="lg">
         <Fade in={!initialLoad} timeout={800}>
-          <Box sx={{ 
-            my: 4,
-            pt: 2,
-          }}>
+          <Box sx={{ my: 4, pt: 2 }}>
+            {/* Add LanguageSwitcher to the top right */}
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+              <LanguageSwitcher />
+            </Box>
             <Box 
               sx={{ 
                 mb: 5, 
@@ -258,7 +262,7 @@ function App() {
                   letterSpacing: '-0.5px',
                 }}
               >
-                Background Removal Tool
+                {t('backgroundRemovalTool')} {/* Translate title */}
               </Typography>
               <Typography 
                 variant="subtitle1" 
@@ -269,7 +273,7 @@ function App() {
                   opacity: 0.8,
                 }}
               >
-                Upload an image and select a model to automatically remove the background with AI
+                {t('appSubtitle')} {/* Translate subtitle */}
               </Typography>
               <Divider sx={{ width: '120px', my: 1 }} />
             </Box>
@@ -345,7 +349,7 @@ function App() {
                     ) : (
                       <ImageIcon size={20} style={{ marginRight: '8px' }} />
                     )}
-                    {loading ? 'Processing...' : 'Remove Background'}
+                    {loading ? t('processing') : t('removeBackground')} {/* Translate button */}
                   </Button>
                   
                   {processedImage && (
@@ -370,7 +374,7 @@ function App() {
                         }}
                         startIcon={<Download size={20} />}
                       >
-                        Download Result
+                        {t('downloadResult')} {/* Translate button */}
                       </Button>
                     </Fade>
                   )}
@@ -412,7 +416,7 @@ function App() {
               }}
             >
               <Typography variant="body2" color="textSecondary">
-                Developed with AI-powered background removal models
+                {t('footerText')} {/* Translate footer */}
               </Typography>
             </Box>
           </Box>

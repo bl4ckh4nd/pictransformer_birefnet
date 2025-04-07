@@ -4,3 +4,10 @@ __pycache__/*
 frontend/node_modules/*
 models/__pycache__/*
 downloaded_models/*
+frontend/.env.development
+.env*
+*.md*
+*.txt*
+*.csv*
+*.log*
+.log*

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Paper, Typography, Fade, useTheme, useMediaQuery } from '@mui/material';
 import ImageTransformControls from './ImageTransformControls';
+import { useLanguage } from '../contexts/LanguageContext'; // Import useLanguage
 
 interface ImageComparisonProps {
   originalImage: string | null;
@@ -39,6 +40,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { t } = useLanguage(); // Get translation function
 
   const imageStyle = {
     maxWidth: '100%',
@@ -92,7 +94,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
                 borderBottom: `1px solid ${theme.palette.divider}`
               }}>
                 <Typography variant="subtitle1" fontWeight="medium">
-                  Original
+                  {t('original')}
                 </Typography>
               </Box>
               <Box sx={{ p: 2 }}>
@@ -134,7 +136,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
                 borderBottom: `1px solid ${theme.palette.divider}`
               }}>
                 <Typography variant="subtitle1" fontWeight="medium">
-                  Background Removed
+                  {t('backgroundRemoved')}
                 </Typography>
               </Box>
               <Box sx={{ p: 2 }}>

@@ -21,6 +21,7 @@ import {
   Palette,
   RefreshCcw,
 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext'; // Import useLanguage
 
 interface ImageTransformControlsProps {
   onRotate: (degrees: number) => void;
@@ -48,6 +49,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
   saturation,
 }) => {
   const theme = useTheme();
+  const { t } = useLanguage(); // Get translation function
   
   return (
     <Paper 
@@ -69,7 +71,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
         }}
       >
         <Typography variant="subtitle1" fontWeight="medium">
-          Image Adjustments
+          {t('imageAdjustments')}
         </Typography>
       </Box>
       
@@ -84,7 +86,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
             flexWrap: 'wrap'
           }}
         >
-          <Tooltip title="Rotate Left">
+          <Tooltip title={t('rotateLeft')}>
             <IconButton 
               onClick={() => onRotate(-90)} 
               sx={{ 
@@ -98,7 +100,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
               <RotateCcw size={22} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Rotate Right">
+          <Tooltip title={t('rotateRight')}>
             <IconButton 
               onClick={() => onRotate(90)} 
               sx={{ 
@@ -112,7 +114,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
               <RotateCw size={22} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Flip Horizontal">
+          <Tooltip title={t('flipHorizontal')}>
             <IconButton 
               onClick={onFlipHorizontal} 
               sx={{ 
@@ -127,7 +129,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
               <FlipHorizontal size={22} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Flip Vertical">
+          <Tooltip title={t('flipVertical')}>
             <IconButton 
               onClick={onFlipVertical} 
               sx={{ 
@@ -142,7 +144,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
               <FlipVertical size={22} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Reset All Adjustments">
+          <Tooltip title={t('resetAllAdjustments')}>
             <Button 
               startIcon={<RefreshCcw size={18} />}
               onClick={onReset}
@@ -154,7 +156,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
                 width: { xs: '100%', sm: 'auto' }
               }}
             >
-              Reset All
+              {t('resetAll')}
             </Button>
           </Tooltip>
         </Box>
@@ -170,7 +172,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
               gap={1} 
               sx={{ color: brightness !== 0 ? theme.palette.primary.main : 'inherit', fontWeight: brightness !== 0 ? 500 : 400 }}
             >
-              <Sun size={18} /> Brightness {brightness !== 0 && `(${brightness > 0 ? '+' : ''}${brightness}%)`}
+              <Sun size={18} /> {t('brightness')} {brightness !== 0 && `(${brightness > 0 ? '+' : ''}${brightness}%)`}
             </Typography>
             <Slider
               value={brightness}
@@ -197,7 +199,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
               gap={1}
               sx={{ color: contrast !== 0 ? theme.palette.primary.main : 'inherit', fontWeight: contrast !== 0 ? 500 : 400 }}
             >
-              <Contrast size={18} /> Contrast {contrast !== 0 && `(${contrast > 0 ? '+' : ''}${contrast}%)`}
+              <Contrast size={18} /> {t('contrast')} {contrast !== 0 && `(${contrast > 0 ? '+' : ''}${contrast}%)`}
             </Typography>
             <Slider
               value={contrast}
@@ -224,7 +226,7 @@ const ImageTransformControls: React.FC<ImageTransformControlsProps> = ({
               gap={1}
               sx={{ color: saturation !== 0 ? theme.palette.primary.main : 'inherit', fontWeight: saturation !== 0 ? 500 : 400 }}
             >
-              <Palette size={18} /> Saturation {saturation !== 0 && `(${saturation > 0 ? '+' : ''}${saturation}%)`}
+              <Palette size={18} /> {t('saturation')} {saturation !== 0 && `(${saturation > 0 ? '+' : ''}${saturation}%)`}
             </Typography>
             <Slider
               value={saturation}

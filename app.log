@@ -2915,3 +2915,188 @@ AttributeError: 'list' object has no attribute 'logits'
 2025-03-10 14:12:29,772 - INFO - Method: GET Path: /sitemap.xml Status: 404 Duration: 0.00s
 2025-03-10 14:12:30,727 - INFO - Method: GET Path: /robots.txt Status: 404 Duration: 0.00s
 2025-03-10 18:59:43,747 - INFO - Method: GET Path: / Status: 200 Duration: 0.02s
+2025-03-17 15:36:48,799 - INFO - Python version: 3.12.2
+2025-03-17 15:36:48,801 - INFO - PyTorch version: 2.6.0+cu124
+2025-03-17 15:36:48,801 - INFO - CUDA available: True
+2025-03-17 15:36:48,801 - INFO - CUDA version: 12.4
+2025-03-17 15:36:48,802 - INFO - Number of CUDA devices: 1
+2025-03-17 15:36:48,812 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-03-17 15:36:48,812 - INFO -   Memory: 8.00GB
+2025-03-17 15:36:48,813 - INFO -   CUDA Capability: 8.6
+2025-03-17 15:36:49,029 - INFO - CUDA test successful - tensor operation completed
+2025-03-17 15:36:49,030 - INFO - Final device selection: cuda
+2025-03-17 15:36:49,680 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-03-17 15:36:49,684 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-03-17 15:36:59,637 - INFO - Model configuration: Config {
+  "IoU_finetune_last_epochs": -50,
+  "SDPA_enabled": false,
+  "auxiliary_classification": false,
+  "batch_size": 4,
+  "batch_size_valid": 1,
+  "bb": "swin_v1_l",
+  "compile": true,
+  "cxt": [
+    384,
+    768,
+    1536
+  ],
+  "cxt_num": 3,
+  "data_root_dir": "C:\\Users\\Merres\\datasets/dis",
+  "dec_att": "ASPPDeformable",
+  "dec_blk": "BasicDecBlk",
+  "dec_channels_inter": "fixed",
+  "dec_ipt": true,
+  "dec_ipt_split": true,
+  "device": 0,
+  "ender": "",
+  "freeze_bb": false,
+  "lambda_adv_d": 0.0,
+  "lambda_adv_g": 0.0,
+  "lambdas_cls": {
+    "ce": 5.0
+  },
+  "lambdas_pix_last": {
+    "bce": 30,
+    "cnt": 0,
+    "iou": 0.5,
+    "iou_patch": 0.0,
+    "mse": 0,
+    "reg": 0,
+    "ssim": 10,
+    "structure": 0,
+    "triplet": 0
+  },
+  "lat_blk": "BasicLatBlk",
+  "lateral_channels_in_collection": [
+    3072,
+    1536,
+    768,
+    384
+  ],
+  "load_all": true,
+  "lr": 0.0001,
+  "lr_decay_epochs": [
+    100000.0
+  ],
+  "lr_decay_rate": 0.5,
+  "model": "BiRefNet",
+  "ms_supervision": true,
+  "mul_scl_ipt": "cat",
+  "num_workers": 4,
+  "only_S_MAE": false,
+  "optimizer": "AdamW",
+  "out_ref": true,
+  "precisionHigh": true,
+  "preproc_methods": [
+    "flip",
+    "enhance",
+    "rotate",
+    "pepper"
+  ],
+  "progressive_ref": "",
+  "prompt4loc": "dense",
+  "rand_seed": 7,
+  "refine": "",
+  "refine_iteration": 1,
+  "scale": "",
+  "size": 1024,
+  "squeeze_block": "BasicDecBlk_x1",
+  "sys_home_dir": "C:\\Users\\Merres",
+  "task": "DIS5K",
+  "training_set": "DIS-TR",
+  "transformers_version": "4.35.2",
+  "use_fp16": false,
+  "verbose_eval": true,
+  "weights": {
+    "pvt_v2_b0": "C:\\Users\\Merres\\weights\\pvt_v2_b0.pth",
+    "pvt_v2_b1": "C:\\Users\\Merres\\weights\\pvt_v2_b1.pth",
+    "pvt_v2_b2": "C:\\Users\\Merres\\weights\\pvt_v2_b2.pth",
+    "pvt_v2_b5": "C:\\Users\\Merres\\weights\\pvt_v2_b5.pth",
+    "swin_v1_b": "C:\\Users\\Merres\\weights\\swin_base_patch4_window12_384_22kto1k.pth",
+    "swin_v1_l": "C:\\Users\\Merres\\weights\\swin_large_patch4_window12_384_22kto1k.pth",
+    "swin_v1_s": "C:\\Users\\Merres\\weights\\swin_small_patch4_window7_224_22kto1k_finetune.pth",
+    "swin_v1_t": "C:\\Users\\Merres\\weights\\swin_tiny_patch4_window7_224_22kto1k_finetune.pth"
+  },
+  "weights_root_dir": "C:\\Users\\Merres\\weights"
+}
+
+2025-03-17 15:36:59,762 - INFO - Created new instance of birefnet
+2025-03-17 15:36:59,764 - INFO - Method: POST Path: /models/birefnet/load Status: 200 Duration: 6.07s
+2025-03-17 15:36:59,772 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-03-17 15:37:00,772 - INFO - Processing image: 0_2 (1).jpeg with model: birefnet
+2025-03-17 15:37:00,791 - INFO - Original image size: (1024, 1024), mode: RGB
+2025-03-17 15:37:00,902 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:37:00,902 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-03-17 15:37:00,905 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:37:07,831 - INFO - Prediction successful, output shape: torch.Size([1, 1, 1024, 1024])
+2025-03-17 15:37:08,009 - INFO - Successfully processed 0_2 (1).jpeg in 7.24s
+2025-03-17 15:37:08,012 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 7.24s
+2025-03-17 15:37:38,477 - INFO - Processing image: 0_1.jpeg with model: birefnet
+2025-03-17 15:37:38,477 - INFO - Original image size: (1024, 1024), mode: RGB
+2025-03-17 15:37:38,494 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:37:38,494 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-03-17 15:37:38,496 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:37:39,902 - INFO - Prediction successful, output shape: torch.Size([1, 1, 1024, 1024])
+2025-03-17 15:37:40,080 - INFO - Successfully processed 0_1.jpeg in 1.60s
+2025-03-17 15:37:40,083 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 1.61s
+2025-03-17 15:37:58,753 - INFO - Processing image: 0_2.jpeg with model: birefnet
+2025-03-17 15:37:58,754 - INFO - Original image size: (1024, 1024), mode: RGB
+2025-03-17 15:37:58,767 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:37:58,767 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-03-17 15:37:58,773 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:38:00,242 - INFO - Prediction successful, output shape: torch.Size([1, 1, 1024, 1024])
+2025-03-17 15:38:00,365 - INFO - Successfully processed 0_2.jpeg in 1.61s
+2025-03-17 15:38:00,368 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 1.62s
+2025-03-17 15:38:57,946 - INFO - Processing image: 0_2 (2).jpeg with model: birefnet
+2025-03-17 15:38:57,948 - INFO - Original image size: (1024, 1024), mode: RGB
+2025-03-17 15:38:57,966 - INFO - Preprocessed tensor shape: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:38:57,966 - INFO - Tensor device: cpu, dtype: torch.float32
+2025-03-17 15:38:57,970 - INFO - Input tensor shape before prediction: torch.Size([1, 3, 1024, 1024])
+2025-03-17 15:38:59,374 - INFO - Prediction successful, output shape: torch.Size([1, 1, 1024, 1024])
+2025-03-17 15:38:59,568 - INFO - Successfully processed 0_2 (2).jpeg in 1.62s
+2025-03-17 15:38:59,570 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 1.63s
+2025-03-17 15:39:07,581 - INFO - Created new instance of ben2
+2025-03-17 15:39:07,582 - INFO - Method: POST Path: /models/ben2/load Status: 200 Duration: 2.44s
+2025-03-17 15:39:07,595 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-03-17 15:39:12,236 - INFO - Processing image: 0_2 (2).jpeg with model: ben2
+2025-03-17 15:39:15,478 - INFO - Successfully processed 0_2 (2).jpeg in 3.24s
+2025-03-17 15:39:15,481 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 3.25s
+2025-03-17 15:44:59,532 - INFO - Processing image: 0_1 (1).jpeg with model: ben2
+2025-03-17 15:45:02,720 - INFO - Successfully processed 0_1 (1).jpeg in 3.19s
+2025-03-17 15:45:02,723 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 3.19s
+2025-04-07 12:56:57,129 - INFO - Python version: 3.12.2
+2025-04-07 12:56:57,131 - INFO - PyTorch version: 2.6.0+cu124
+2025-04-07 12:56:57,131 - INFO - CUDA available: True
+2025-04-07 12:56:57,131 - INFO - CUDA version: 12.4
+2025-04-07 12:56:57,132 - INFO - Number of CUDA devices: 1
+2025-04-07 12:56:57,141 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-04-07 12:56:57,142 - INFO -   Memory: 8.00GB
+2025-04-07 12:56:57,142 - INFO -   CUDA Capability: 8.6
+2025-04-07 12:56:57,364 - INFO - CUDA test successful - tensor operation completed
+2025-04-07 12:56:57,364 - INFO - Final device selection: cuda
+2025-04-07 12:57:20,249 - INFO - Python version: 3.12.2
+2025-04-07 12:57:20,250 - INFO - PyTorch version: 2.6.0+cu124
+2025-04-07 12:57:20,250 - INFO - CUDA available: True
+2025-04-07 12:57:20,251 - INFO - CUDA version: 12.4
+2025-04-07 12:57:20,251 - INFO - Number of CUDA devices: 1
+2025-04-07 12:57:20,262 - INFO - GPU 0: NVIDIA GeForce RTX 3070 Laptop GPU
+2025-04-07 12:57:20,262 - INFO -   Memory: 8.00GB
+2025-04-07 12:57:20,262 - INFO -   CUDA Capability: 8.6
+2025-04-07 12:57:20,518 - INFO - CUDA test successful - tensor operation completed
+2025-04-07 12:57:20,519 - INFO - Final device selection: cuda
+2025-04-07 13:00:24,890 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:00:24,907 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:00:32,281 - INFO - Created new instance of ben2
+2025-04-07 13:00:32,282 - INFO - Method: POST Path: /models/ben2/load Status: 200 Duration: 4.69s
+2025-04-07 13:00:32,290 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:00:37,670 - INFO - Processing image: ChatGPT Image 31. März 2025, 10_32_21.png with model: ben2
+2025-04-07 13:00:42,536 - INFO - Successfully processed ChatGPT Image 31. März 2025, 10_32_21.png in 4.87s
+2025-04-07 13:00:42,538 - INFO - Method: POST Path: /remove-background/ Status: 200 Duration: 4.89s
+2025-04-07 13:03:15,854 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:03:15,860 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:04:15,596 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:04:15,725 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:04:24,558 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:04:24,564 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:04:57,164 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:04:57,172 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s

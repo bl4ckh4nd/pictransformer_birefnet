@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Box, Typography, Paper, useTheme, Fade } from '@mui/material';
 import { UploadCloud, Image } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext'; // Import useLanguage
 
 interface ImageUploadProps {
   onImageSelect: (file: File) => void;
@@ -10,6 +11,7 @@ interface ImageUploadProps {
 const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
   const theme = useTheme();
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useLanguage(); // Get translation function
   
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     accept: {
@@ -98,10 +100,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
             />
             <Typography variant="h6" sx={{ mt: 2, fontWeight: 500 }}>
               {isDragAccept 
-                ? 'Drop to upload!' 
-                : isDragReject 
-                  ? 'Unsupported file type' 
-                  : 'Drop files here'
+                ? t('dropToUpload')
+                : isDragReject
+                  ? t('unsupportedFileType')
+                  : t('dropFilesHere')
               }
             </Typography>
           </Box>
@@ -143,7 +145,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
             </Box>
           </Box>
           <Typography variant="h6" gutterBottom fontWeight={500}>
-            {isDragActive ? 'Drop the image here' : 'Upload an image'}
+            {isDragActive ? t('dropImageHere') : t('uploadImage')}
           </Typography>
           <Typography 
             variant="body2" 
@@ -154,7 +156,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
               opacity: 0.8
             }}
           >
-            Drag and drop your image here, or click to select a file
+            {t('dragDropOrClick')}
           </Typography>
           <Typography 
             variant="caption" 
@@ -165,7 +167,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
               opacity: 0.6 
             }}
           >
-            Supports JPG, PNG, JPEG and WebP
+            {t('supportedFormats')}
           </Typography>
         </Box>
       </Paper>

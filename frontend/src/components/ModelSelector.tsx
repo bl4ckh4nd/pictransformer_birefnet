@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { Check, HelpCircle, Zap } from 'lucide-react';
 import { ModelInfo } from '../services/api';
+import { useLanguage } from '../contexts/LanguageContext'; // Import useLanguage
 
 interface ModelSelectorProps {
   models: Record<string, ModelInfo>;
@@ -33,6 +34,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
   onRefinementChange,
 }) => {
   const theme = useTheme();
+  const { t } = useLanguage(); // Get translation function
   const currentModel = models[selectedModel];
   const supportsRefinement = currentModel?.metadata?.supports_refinement || false;
 
@@ -56,7 +58,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
           style={{ marginRight: 8 }}
         />
         <Typography variant="h6" fontWeight={500} fontSize={18}>
-          Model Selection
+          {t('modelSelection')}
         </Typography>
       </Box>
       
@@ -77,13 +79,13 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
         }}
       >
         <InputLabel id="model-select-label" sx={{ background: theme.palette.background.paper, px: 1 }}>
-          Model
+          {t('model')}
         </InputLabel>
         <Select
           labelId="model-select-label"
           id="model-select"
           value={selectedModel}
-          label="Model"
+          label={t('model')}
           onChange={(e) => onModelChange(e.target.value)}
         >
           {Object.entries(models).map(([key, model]) => (
@@ -118,9 +120,9 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
                 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                   {model.metadata?.supports_refinement && (
-                    <Tooltip title="Supports image refinement">
+                    <Tooltip title={t('supportsRefinement')}>
                       <Chip 
-                        label="Refinement" 
+                        label={t('refinement')}
                         size="small" 
                         variant="outlined" 
                         color="info"
@@ -129,9 +131,9 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
                   )}
                   
                   {model.loaded && (
-                    <Tooltip title="Model is loaded and ready to use">
+                    <Tooltip title={t('modelLoaded')}>
                       <Chip
-                        label="Loaded"
+                        label={t('loaded')}
                         color="success"
                         size="small"
                         sx={{ 
@@ -182,8 +184,8 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
             }
             label={
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography sx={{ mr: 1 }}>Enable refinement</Typography>
-                <Tooltip title="Apply additional processing to improve edge quality">
+                <Typography sx={{ mr: 1 }}>{t('enableRefinement')}</Typography>
+                <Tooltip title={t('refinementTooltip')}>
                   <HelpCircle size={16} color={theme.palette.text.secondary} />
                 </Tooltip>
               </Box>
