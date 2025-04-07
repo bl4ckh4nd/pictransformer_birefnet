@@ -15,7 +15,6 @@ This project provides a web application for removing backgrounds from images usi
 
 *   **Backend:** Python, FastAPI, Uvicorn, PyTorch, Pillow
 *   **Frontend:** React, TypeScript, Material UI, Axios
-*   **Deployment:** (Potentially Modal for API, Vercel/Netlify/etc. for Frontend - *mention based on your actual deployment*)
 
 ## Project Structure
 
