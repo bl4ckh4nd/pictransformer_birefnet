@@ -3100,3 +3100,6 @@ AttributeError: 'list' object has no attribute 'logits'
 2025-04-07 13:04:24,564 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
 2025-04-07 13:04:57,164 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
 2025-04-07 13:04:57,172 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:47:59,869 - INFO - Method: GET Path: /models Status: 200 Duration: 0.25s
+2025-04-07 13:47:59,927 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s
+2025-04-07 13:48:07,686 - INFO - Method: GET Path: /models Status: 200 Duration: 0.00s

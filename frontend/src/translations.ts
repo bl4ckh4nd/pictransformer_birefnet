@@ -29,7 +29,7 @@ export const translations = {
     language: 'Language',
     english: 'English',
     german: 'German',
-    backgroundRemovalTool: 'Background Removal Tool',
+    // backgroundRemovalTool key removed
     appSubtitle: 'Upload an image and select a model to automatically remove the background with AI',
     processing: 'Processing...',
     removeBackground: 'Remove Background',
@@ -67,7 +67,7 @@ export const translations = {
     language: 'Sprache',
     english: 'Englisch',
     german: 'Deutsch',
-    backgroundRemovalTool: 'Hintergrund-Entferner Werkzeug',
+    // backgroundRemovalTool key removed
     appSubtitle: 'Laden Sie ein Bild hoch und wählen Sie ein Modell aus, um den Hintergrund automatisch mit KI zu entfernen',
     processing: 'Verarbeite...',
     removeBackground: 'Hintergrund entfernen',
@@ -78,4 +78,4 @@ export const translations = {
 };
 
 export type Language = keyof typeof translations;
-export type TranslationKey = keyof typeof translations.en; // Use 'en' as the reference
+export type TranslationKey = keyof Omit<typeof translations.en, 'backgroundRemovalTool'>; // Update type

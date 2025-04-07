@@ -262,7 +262,7 @@ function App() {
                   letterSpacing: '-0.5px',
                 }}
               >
-                {t('backgroundRemovalTool')} {/* Translate title */}
+                VisionCut {/* Set title directly */}
               </Typography>
               <Typography 
                 variant="subtitle1" 
